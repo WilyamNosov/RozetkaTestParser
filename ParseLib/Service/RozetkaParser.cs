@@ -73,15 +73,13 @@ namespace ParseLib.Service
 
         public List<Dictionary<string, string>> GetItemsData(List<string> productsUrls)
         {
-            var i = 0;
             var result = new List<Dictionary<string, string>>();
 
             foreach (var productUrl in productsUrls)
             {
                 _semaphore.WaitOne();
+            
                 Thread thread = new Thread(() => {
-
-                    i++;
                     var productData = GetItemCharacteristic(productUrl);
                     
                     result.Add(productData);
